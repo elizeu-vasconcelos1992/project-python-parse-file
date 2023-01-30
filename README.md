@@ -36,7 +36,7 @@
 
 <br>
 
-<p>São requisitos para a instalação manual que existam previamente em sua máquina o <a href="https://www.python.org/downloads/"><strong>PYTHON</strong></a> e o gerenciador de pacotes <a href="https://pypi.org/project/pip/"><strong>PIP</strong></a>. Também, é recomendável mas não obrigatório, que na raiz do projeto seja utilizado algum ambiente virtual para que as dependências do projeto não sejam instaladas globalmente em sua máquina. </p>
+<p>São requisitos para a instalação manual que existam previamente em sua máquina o <a href="https://www.python.org/downloads/"><strong>PYTHON</strong></a> e o gerenciador de pacotes <a href="https://pypi.org/project/pip/"><strong>PIP</strong></a>. Também é recomendável, mas não obrigatório, que na raiz do projeto esteja ativo algum ambiente virtual para que as dependências do projeto não sejam instaladas globalmente em sua máquina. </p>
 
 <br>
 
