@@ -1,0 +1,2 @@
+# Dicionario com os tipos de transacoes do modelo CNAB
+tipos = {"1": "Débito", "2": "Boleto", "3": "Financiamento", "4": "Crédito", "5": "Empréstimo", "6": "Vendas", "7": "TED", "8": "DOC", "9": "Aluguel"}

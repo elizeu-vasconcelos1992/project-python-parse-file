@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interpretador de dados CNAB</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
+      * {
+        font-family: "Roboto";
+      }
+
+      body {
+        background-color: #f5f5f5;
+      }
+
+      form {
+        background-color: #ffffff;
+        padding: 25px;
+      }
+
+      #upload-form {
+        width: fit-content;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        gap: 100px;
+        background-color: #f5f5f5;
+      }
+
+      #delete-form {
+        width: fit-content;
+        margin: 0 auto;
+        background-color: #f5f5f5;
+      }
+
+      input {
+        cursor: pointer;
+      }
+
+      #upload {
+        box-shadow: inset 0px 1px 3px 0px #91b8b3;
+        background: linear-gradient(to bottom, #768d87 5%, #6c7c7c 100%);
+        background-color: #768d87;
+        border-radius: 5px;
+        border: 1px solid #566963;
+        color: #ffffff;
+        font-size: 15px;
+        font-weight: bold;
+        padding: 11px 23px;
+        text-decoration: none;
+        text-shadow: 0px -1px 0px #2b665e;
+      }
+
+      #delete {
+        background-color: #ff0000;
+        border-radius: 5px;
+        border: 1px solid #ff0000;
+        color: #ffffff;
+        font-size: 15px;
+        font-weight: bold;
+        padding: 11px 23px;
+        text-decoration: none;
+        text-shadow: 0px -1px 0px #ff0000;
+      }
+
+      h2 {
+        width: fit-content;
+        margin: 0 auto;
+        padding-top: 25px;
+      }
+
+      table {
+        width: 100%;
+        text-align: center;
+        margin-top: 25px;
+        padding: 25px;
+        background-color: #ffffff;
+        border: 3px solid #000000;
+      }
+
+      table tr td {
+        padding-top: 15px;
+      }
+
+      .loja {
+        padding: 25px 0;
+        margin: 0 auto;
+        background-color: #e6e6fa;
+      }
+
+      .saldo {
+        padding: 20px 0;
+        background-color: #ff6a6a;
+      }
+    </style>
+  </head>
+  <body>
+    <head>
+      <form
+        id="upload-form"
+        action="{% url 'parsefile:cnab_file' %}"
+        method="POST"
+        enctype="multipart/form-data"
+      >
+        <input type="file" name="uploadedFile" accept=".txt" required />
+        {% csrf_token %}
+        <input id="upload" type="submit" value="Upload" name="Upload" />
+      </form>
+    </head>
+    <main>
+      <h2>Lista de Transações por Loja</h2>
+      <table>
+        {% for item in files2 %}
+        <tr>
+          <th colspan="6" class="loja">{{item.name}}</th>
+        </tr>
+        <tr>
+          <th>Tipo</th>
+          <th>Data</th>
+          <th>CPF</th>
+          <th>Cartão</th>
+          <th>Hora</th>
+          <th>Valor</th>
+        </tr>
+        {% for file in files %} {% if item.id == file.store.id %}
+        <tr>
+          <td>{{ file.tipo }}</td>
+          <td>{{ file.data|date:"d M, Y" }}</td>
+          <td>{{ file.cpf }}</td>
+          <td>{{ file.cartao }}</td>
+          <td>{{ file.data|time:"H:i"}}</td>
+          <td>R$ {{ file.valor }}</td>
+        </tr>
+        {% endif %} {% endfor %}
+        <tr>
+          <th>Saldo</th>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td class="saldo">R$ {{item.saldo}}</td>
+        </tr>
+        {% endfor %}
+      </table>
+      <form
+        id="delete-form"
+        action="{% url 'parsefile:cnab_file' %}"
+        method="POST"
+        enctype="multipart/form-data"
+      >
+        {% csrf_token %}
+        <input id="delete" type="submit" value="Deletar Dados" name="delete" />
+      </form>
+    </main>
+  </body>
+</html>
