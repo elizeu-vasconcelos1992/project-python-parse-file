@@ -40,7 +40,7 @@
 
 <br>
 
-<p>Cumpridas essas recomendações rode no terminal o seguinte comando:</p>
+<p>Cumpridas essas recomendações, acesse a raiz do projeto e rode no terminal o seguinte comando:</p>
 
 <br>
 
